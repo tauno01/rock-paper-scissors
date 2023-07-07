@@ -1,13 +1,8 @@
 function getComputerChoice() {
 
-    let randomNumber = Math.random();
-    if(randomNumber < 0.33) {
-        return "rock";
-    } else if(randomNumber <= 0.66) {
-        return "paper";
-    } else {
-        return "scissors"
-    }
+    const computerValue = ["rock", "paper", "scissors"];
+    const randomIndex = Math.floor(Math.random() * computerValue.length);
+    return computerValue[randomIndex];
 
 }
 
@@ -47,9 +42,9 @@ function game() {
         playerValueOne = prompt("Rock, paper, or scissors?");
         playerValue = playerValueOne.toLowerCase();
 
-        if( playerValue !== "rock" &&
+        if(playerValue !== "rock" &&
         playerValue !== "paper" &&
-        playerValue !== "scissors" ) {
+        playerValue !== "scissors") {
             console.log("You didn't write a proper value.")
             return;
         }
