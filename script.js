@@ -1,5 +1,5 @@
 /* Create a function that randomly returns either 
-rock, paper, or scissors DONE*/
+rock, paper, or scissors */
 
 function getComputerChoice() {
 
@@ -17,7 +17,7 @@ function getComputerChoice() {
 /* Write a function that plays a single round of rock paper scissors.
 The function should take two parameters - playerSelection and 
 computerSelection, and then return a string that declares the
-winner of the round DONE*/
+winner of the round */
 
 let totalPlayerPoints = 0;
 let totalComputerPoints = 0;
@@ -44,8 +44,6 @@ function gameRound(playerValue, computerValue) {
     totalComputerPoints += computerPoints;
     return [totalPlayerPoints, totalComputerPoints];
 }
-
-// Make function's playerSelection parameter case-insensitive
 
 /* Write a function called game(), and use the previous function
 INSIDE this function to play a 5 round game that keeps score and
