@@ -53,6 +53,9 @@ reports a winner at end */
 
 function game() {
 
+    totalComputerPoints = 0;
+    totalPlayerPoints = 0;
+
     for(i = 0; i < 5; i++) {
         playerValueOne = prompt("Rock, paper, or scissors?");
         playerValue = playerValueOne.toLowerCase();
@@ -61,11 +64,11 @@ function game() {
     }
 
     if(totalPlayerPoints > totalComputerPoints) {
-        console.log("You won the whole game!");
+        console.log(`You won the whole game! Overall score: ${totalPlayerPoints} - ${totalComputerPoints}`);
     } else if(totalComputerPoints > totalPlayerPoints) {
-        console.log("You lost the game.")
+        console.log(`You lost the game. Overall score: ${totalPlayerPoints} - ${totalComputerPoints}`)
     } else {
-        console.log("The game ended in a tie.")
+        console.log(`The game ended in a tie. Overall score: ${totalPlayerPoints} - ${totalComputerPoints}`)
     }
 
 }
