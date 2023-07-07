@@ -1,6 +1,3 @@
-/* Create a function that randomly returns either 
-rock, paper, or scissors */
-
 function getComputerChoice() {
 
     let randomNumber = Math.random();
@@ -14,10 +11,6 @@ function getComputerChoice() {
 
 }
 
-/* Write a function that plays a single round of rock paper scissors.
-The function should take two parameters - playerSelection and 
-computerSelection, and then return a string that declares the
-winner of the round */
 
 let totalPlayerPoints = 0;
 let totalComputerPoints = 0;
@@ -45,10 +38,6 @@ function gameRound(playerValue, computerValue) {
     return [totalPlayerPoints, totalComputerPoints];
 }
 
-/* Write a function called game(), and use the previous function
-INSIDE this function to play a 5 round game that keeps score and
-reports a winner at end */
-
 function game() {
 
     totalComputerPoints = 0;
@@ -57,6 +46,14 @@ function game() {
     for(i = 0; i < 5; i++) {
         playerValueOne = prompt("Rock, paper, or scissors?");
         playerValue = playerValueOne.toLowerCase();
+
+        if( playerValue !== "rock" &&
+        playerValue !== "paper" &&
+        playerValue !== "scissors" ) {
+            console.log("You didn't write a proper value.")
+            return;
+        }
+
         const computerValue = getComputerChoice();
         gameRound(playerValue, computerValue);
     }
