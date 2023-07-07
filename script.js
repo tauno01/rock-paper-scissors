@@ -4,7 +4,7 @@ rock, paper, or scissors */
 function getComputerChoice() {
 
     let randomNumber = Math.random();
-    if(randomNumber <= 0.33) {
+    if(randomNumber < 0.33) {
         return "rock";
     } else if(randomNumber <= 0.66) {
         return "paper";
@@ -32,12 +32,12 @@ function gameRound(playerValue, computerValue) {
         (playerValue.length === 4 && computerValue.length === 8)
     ) {
         playerPoints++;
-        console.log("You win, " + playerValue + " beats " + computerValue + "!");
+        console.log(`You win, your ${playerValue} beats opponent's ${computerValue}!`);
     } else if (playerValue.length === computerValue.length) {
         console.log("It's a tie!");
     } else {
         computerPoints++;
-        console.log("You lose, " + playerValue + " doesn't beat " + computerValue + ".");
+        console.log(`You lost, ${playerValue} loses to opponent's ${computerValue}.`);
     }
 
     totalPlayerPoints += playerPoints;
@@ -61,7 +61,11 @@ function game() {
         gameRound(playerValue, computerValue);
     }
 
-    if(totalPlayerPoints > totalComputerPoints) {
+    if(totalPlayerPoints === 5) {
+        console.log(`You absolutely destroyed your opponent, good job! Overall score: ${totalPlayerPoints} - ${totalComputerPoints}`)
+    } else if(totalComputerPoints === 5) {
+        console.log(`Wow you got absolutely destroyed by your opponent. Overall score: ${totalPlayerPoints} - ${totalComputerPoints}`)
+    } else if(totalPlayerPoints > totalComputerPoints) {
         console.log(`You won the whole game! Overall score: ${totalPlayerPoints} - ${totalComputerPoints}`);
     } else if(totalComputerPoints > totalPlayerPoints) {
         console.log(`You lost the game. Overall score: ${totalPlayerPoints} - ${totalComputerPoints}`)
@@ -70,3 +74,5 @@ function game() {
     }
 
 }
+
+console.log("Type 'game()' and hit enter to start the game.")
