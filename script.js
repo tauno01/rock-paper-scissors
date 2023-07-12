@@ -1,3 +1,13 @@
+const div = document.createElement('div');
+const divTwo = document.createElement('div');
+const scriptTag = document.querySelector('script');
+
+document.body.insertBefore(div, scriptTag);
+document.body.insertBefore(divTwo, scriptTag);
+
+const buttons = Array.from(document.querySelectorAll('button'));
+buttons.forEach(item => item.addEventListener('click', game));
+
 function getComputerChoice() {
 
     const computerValue = ["rock", "paper", "scissors"];
@@ -6,65 +16,53 @@ function getComputerChoice() {
 
 }
 
-
 let totalPlayerPoints = 0;
 let totalComputerPoints = 0;
 
-function gameRound(playerValue, computerValue) {
+function game(event) {
+
+    const playerValue = event.target.textContent;
+    const playerValueLower = playerValue.toLowerCase();
+    const computerValue = getComputerChoice();
+
     let playerPoints = 0;
     let computerPoints = 0;
 
     if (
-        (playerValue.length === 8 && computerValue.length === 5) ||
-        (playerValue.length === 5 && computerValue.length === 4) ||
-        (playerValue.length === 4 && computerValue.length === 8)
+        (playerValueLower.length === 8 && computerValue.length === 5) ||
+        (playerValueLower.length === 5 && computerValue.length === 4) ||
+        (playerValueLower.length === 4 && computerValue.length === 8)
     ) {
         playerPoints++;
-        console.log(`You win, your ${playerValue} beats opponent's ${computerValue}!`);
-    } else if (playerValue.length === computerValue.length) {
-        console.log("It's a tie!");
+        div.textContent = `You win, your ${playerValueLower} beats opponent's ${computerValue}!`;
+    } else if (playerValueLower.length === computerValue.length) {
+        div.textContent = "It's a tie!";
     } else {
         computerPoints++;
-        console.log(`You lost, ${playerValue} loses to opponent's ${computerValue}.`);
+        div.textContent = `You lost, ${playerValueLower} loses to opponent's ${computerValue}.`;
     }
 
     totalPlayerPoints += playerPoints;
     totalComputerPoints += computerPoints;
-    return [totalPlayerPoints, totalComputerPoints];
-}
 
-function game() {
+    divTwo.textContent = `Score ${totalPlayerPoints} - ${totalComputerPoints}`;
 
-    totalComputerPoints = 0;
-    totalPlayerPoints = 0;
+    while (totalComputerPoints === 5 || totalPlayerPoints === 5) {
 
-    for(i = 0; i < 5; i++) {
-        playerValueOne = prompt("Rock, paper, or scissors?");
-        playerValue = playerValueOne.toLowerCase();
-
-        if(playerValue !== "rock" &&
-        playerValue !== "paper" &&
-        playerValue !== "scissors") {
-            console.log("You didn't write a proper value.")
-            return;
+        if (totalPlayerPoints > totalComputerPoints) {
+            div.textContent = 'You won the Whole game!';
+            divTwo.textContent = `Total score ${totalPlayerPoints} - ${totalComputerPoints}`;
+            return [(totalPlayerPoints = 0), (totalComputerPoints = 0)];
+        } else if (totalPlayerPoints < totalComputerPoints) {
+            div.textContent = `You lost the whole game.`;
+            divTwo.textContent = `Total score ${totalPlayerPoints} - ${totalComputerPoints}`;
+            return [(totalPlayerPoints = 0), (totalComputerPoints = 0)];
+        } else {
+            div.textContent = `The game ended in a tie.`;
+            divTwo.textContent = `Total score ${totalPlayerPoints} - ${totalComputerPoints}`;
+            return [(totalPlayerPoints = 0), (totalComputerPoints = 0)];
         }
 
-        const computerValue = getComputerChoice();
-        gameRound(playerValue, computerValue);
-    }
-
-    if(totalPlayerPoints === 5) {
-        console.log(`You absolutely destroyed your opponent, good job! Overall score: ${totalPlayerPoints} - ${totalComputerPoints}`)
-    } else if(totalComputerPoints === 5) {
-        console.log(`Wow you got absolutely destroyed by your opponent. Overall score: ${totalPlayerPoints} - ${totalComputerPoints}`)
-    } else if(totalPlayerPoints > totalComputerPoints) {
-        console.log(`You won the whole game! Overall score: ${totalPlayerPoints} - ${totalComputerPoints}`);
-    } else if(totalComputerPoints > totalPlayerPoints) {
-        console.log(`You lost the game. Overall score: ${totalPlayerPoints} - ${totalComputerPoints}`)
-    } else {
-        console.log(`The game ended in a tie. Overall score: ${totalPlayerPoints} - ${totalComputerPoints}`)
     }
 
 }
-
-console.log("Type 'game()' and hit enter to start the game.")
